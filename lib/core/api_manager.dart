@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:movieapp/shared_preference.dart';
+import 'package:movieapp/core/shared_preference.dart';
 import 'package:talker_dio_logger/talker_dio_logger.dart';
 
 class ApiManager {

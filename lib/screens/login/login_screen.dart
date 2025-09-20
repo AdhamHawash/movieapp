@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:movieapp/login/login_view_model.dart';
-import 'package:movieapp/register/register_screen.dart';
-import 'package:movieapp/reset_password/reset_password.dart';
-import 'package:movieapp/states.dart';
+import 'package:movieapp/screens/home_screen.dart';
+import 'package:movieapp/screens/login/login_view_model.dart';
+import 'package:movieapp/screens/register/register_screen.dart';
+import 'package:movieapp/screens/forget_password.dart';
+import 'package:movieapp/core/states.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routeName = "login";
@@ -18,7 +19,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  bool hideText = false;
+  bool hideText = true;
 
   List<bool> selected = [true, false];
 
@@ -73,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
           }
           if (state is SucessState) {
             Navigator.of(context, rootNavigator: true).pop();
-            Navigator.pushReplacementNamed(context, RegisterScreen.routeName);
+            Navigator.pushReplacementNamed(context, HomeScreen.routeName);
           }
         },
         child: Scaffold(
@@ -213,9 +214,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              Navigator.pushReplacementNamed(
+                              Navigator.pushNamed(
                                 context,
-                                ResetPassword.routeName,
+                                ForgetPassword.routeName,
                               );
                             },
                             child: Text(

@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movieapp/api_manager.dart';
-import 'package:movieapp/states.dart';
-import 'package:movieapp/user_model.dart';
+import 'package:movieapp/core/api_manager.dart';
+import 'package:movieapp/core/states.dart';
+import 'package:movieapp/models/user_model.dart';
 
 class RegisterViewModel extends Cubit<States> {
   RegisterViewModel() : super(InitState());

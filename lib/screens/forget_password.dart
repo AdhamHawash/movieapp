@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-class ResetPassword extends StatelessWidget {
-  static const String routeName="resetPassword";
+class ForgetPassword extends StatelessWidget {
+  static const String routeName="forgetPassword";
   static const Color bg = Colors.black;
   static const Color accent = Color(0xFFF6BD00);
   static const Color fieldBg = Color(0xFF282A28);
   static const Color hint = Colors.white;
 
-  const ResetPassword({super.key});
+  const ForgetPassword({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
