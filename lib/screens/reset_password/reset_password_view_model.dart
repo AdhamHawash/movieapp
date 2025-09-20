@@ -1,10 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movieapp/core/api_manager.dart';
+import 'package:movieapp/core/user_api_manager.dart';
 import 'package:movieapp/core/states.dart';
 
 class ResetPasswordViewModel extends Cubit<States> {
   ResetPasswordViewModel() : super(InitState());
-  ApiManager apimanager = ApiManager();
+  UserApiManager apimanager = UserApiManager();
 
   resetPassword(String oldPassword,String newPassword) async {
     try {

@@ -2,11 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:movieapp/core/shared_preference.dart';
 import 'package:talker_dio_logger/talker_dio_logger.dart';
 
-class ApiManager {
+class UserApiManager {
   SharedPreference sharedPreference = SharedPreference();
   late Dio dio;
 
-  ApiManager() {
+  UserApiManager() {
     dio = Dio();
     dio.options.baseUrl = "https://route-movie-apis.vercel.app/";
     dio.interceptors.add(TalkerDioLogger());
