@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movieapp/screens/home_screen.dart';
 import 'package:movieapp/screens/login/login_screen.dart';
+import 'package:movieapp/screens/movie_details/movie_details.dart';
 import 'package:movieapp/screens/register/register_screen.dart';
 import 'package:movieapp/screens/forget_password.dart';
 import 'package:movieapp/core/shared_preference.dart';
@@ -33,6 +34,7 @@ class MovieApp extends StatelessWidget {
           ResetPassword.routeName: (context) => ResetPassword(),
           HomeScreen.routeName: (context) => HomeScreen(),
           ForgetPassword.routeName:(context) => ForgetPassword(),
+          MovieDetails.routeName:(context)=> MovieDetails()
         },
         initialRoute: 
             token == null ? LoginScreen.routeName : HomeScreen.routeName,

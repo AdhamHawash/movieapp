@@ -1,11 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movieapp/core/api_manager.dart';
+import 'package:movieapp/core/user_api_manager.dart';
 import 'package:movieapp/core/shared_preference.dart';
 import 'package:movieapp/core/states.dart';
 
 class LoginViewModel extends Cubit<States> {
   LoginViewModel() : super(InitState());
-  ApiManager apimanager = ApiManager();
+  UserApiManager apimanager = UserApiManager();
 
   login(String email, String password) async {
     try {
