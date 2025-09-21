@@ -36,8 +36,8 @@ class MovieApp extends StatelessWidget {
           ForgetPassword.routeName:(context) => ForgetPassword(),
           MovieDetails.routeName:(context)=> MovieDetails()
         },
-        initialRoute: MovieDetails.routeName
-            // token == null ? LoginScreen.routeName : HomeScreen.routeName,
+        initialRoute: 
+            token == null ? LoginScreen.routeName : HomeScreen.routeName,
       ),
     );
   }
