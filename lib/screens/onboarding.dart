@@ -1,9 +1,12 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:movieapp/core/shared_preference.dart';
 import 'package:movieapp/screens/login/login_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
+  static const String routeName = "onboarding";
+
   const OnboardingScreen({super.key});
 
   @override
@@ -14,40 +17,46 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _controller = PageController();
   int _currentPage = 0;
 
+  @override
+  void initState() {
+    super.initState();
+    SharedPreference.assignFirst();
+  }
+
   final List<Map<String, String>> onboardingData = [
     {
       "image": "assets/images/onboarding1.png",
       "title": "Find Your Next Favorite Movie Here",
       "description":
-      "Get access to a huge library of movies to suit all tastes. You will surely like it.",
+          "Get access to a huge library of movies to suit all tastes. You will surely like it.",
       "button": "Explore Now",
     },
     {
       "image": "assets/images/onboarding2.png",
       "title": "Discover Movies",
       "description":
-      "Explore a vast collection of movies in all qualities and genres. Find your next favorite film with ease.",
+          "Explore a vast collection of movies in all qualities and genres. Find your next favorite film with ease.",
       "button": "Next",
     },
     {
       "image": "assets/images/onboarding3.png",
       "title": "Explore All Genres",
       "description":
-      "Discover movies from every genre, in all available qualities. Find something new and exciting to watch every day..",
+          "Discover movies from every genre, in all available qualities. Find something new and exciting to watch every day..",
       "button": "Next",
     },
     {
       "image": "assets/images/onboarding4.png",
       "title": "Create Watchlists",
       "description":
-      "Save movies to your watchlist to keep track of what you want to watch next. Enjoy films in various qualities and genres.",
+          "Save movies to your watchlist to keep track of what you want to watch next. Enjoy films in various qualities and genres.",
       "button": "Next",
     },
     {
       "image": "assets/images/onboarding5.png",
       "title": "Rate, Review, and Learn",
       "description":
-      "Share your thoughts on the movies you've watched. Dive deep into film details and help others discover great movies with your reviews.",
+          "Share your thoughts on the movies you've watched. Dive deep into film details and help others discover great movies with your reviews.",
       "button": "Next",
     },
     {
@@ -95,26 +104,25 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage(onboardingData[index]["image"]!),
-                    fit: BoxFit.contain,
+                    fit: BoxFit.cover,
                     alignment: const Alignment(0, -0.8),
                   ),
                 ),
                 child: Container(
-                  decoration: index == 2
-                      ? const BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        Color(0xff85210E),
-                        Colors.transparent,
-                        Color(0xff85210E),
-                      ],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                    ),
-                  )
-                      : BoxDecoration(
-                    color: Colors.black.withOpacity(0.4),
-                  ),
+                  decoration:
+                      index == 2
+                          ? const BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                Color(0xff85210E),
+                                Colors.transparent,
+                                Color(0xff85210E),
+                              ],
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                            ),
+                          )
+                          : BoxDecoration(color: Colors.black.withOpacity(0.4)),
                 ),
               );
             },
@@ -177,9 +185,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
                 padding: const EdgeInsets.fromLTRB(20, 24, 20, 32),
                 child: SizedBox(
-                  height: _currentPage == onboardingData.length - 1 || _currentPage == 1
-                      ? MediaQuery.of(context).size.height * 0.3 // smaller for last
-                      : MediaQuery.of(context).size.height * 0.37,
+                  height:
+                      _currentPage == onboardingData.length - 1 ||
+                              _currentPage == 1
+                          ? MediaQuery.of(context).size.height *
+                              0.3 // smaller for last
+                          : MediaQuery.of(context).size.height * 0.37,
                   child: SingleChildScrollView(
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -230,7 +241,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                 style: OutlinedButton.styleFrom(
                                   foregroundColor: const Color(0xffF6BD00),
                                   side: const BorderSide(
-                                      color: Color(0xffF6BD00), width: 2),
+                                    color: Color(0xffF6BD00),
+                                    width: 2,
+                                  ),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15),
                                   ),
@@ -242,7 +255,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             ],
                           )
                         else if (_currentPage == 1)
-                        /// Second screen: only Next
+                          /// Second screen: only Next
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xffF6BD00),
@@ -257,73 +270,83 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           )
                         else if (_currentPage == onboardingData.length - 1)
                           /// Last screen: Finish above Back
-                            Column(
-                              children: [
-                                ElevatedButton(
+                          Column(
+                            children: [
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: const Color(0xffF6BD00),
+                                  foregroundColor: const Color(0xff121312),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  minimumSize: const Size(double.infinity, 50),
+                                ),
+                                onPressed: _nextPage,
+                                child: const Text("Finish"),
+                              ),
+                              const SizedBox(height: 12),
+                              OutlinedButton(
+                                style: OutlinedButton.styleFrom(
+                                  foregroundColor: const Color(0xffF6BD00),
+                                  side: const BorderSide(
+                                    color: Color(0xffF6BD00),
+                                    width: 2,
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  minimumSize: const Size(double.infinity, 50),
+                                ),
+                                onPressed: _previousPage,
+                                child: const Text("Back"),
+                              ),
+                            ],
+                          )
+                        else
+                          Row(
+                            children: [
+                              Expanded(
+                                child: OutlinedButton(
+                                  style: OutlinedButton.styleFrom(
+                                    foregroundColor: const Color(0xffF6BD00),
+                                    side: const BorderSide(
+                                      color: Color(0xffF6BD00),
+                                      width: 2,
+                                    ),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    minimumSize: const Size(
+                                      double.infinity,
+                                      50,
+                                    ),
+                                  ),
+                                  onPressed: _previousPage,
+                                  child: const Text("Back"),
+                                ),
+                              ),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: const Color(0xffF6BD00),
                                     foregroundColor: const Color(0xff121312),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(15),
                                     ),
-                                    minimumSize: const Size(double.infinity, 50),
+                                    minimumSize: const Size(
+                                      double.infinity,
+                                      50,
+                                    ),
                                   ),
                                   onPressed: _nextPage,
-                                  child: const Text("Finish"),
-                                ),
-                                const SizedBox(height: 12),
-                                OutlinedButton(
-                                  style: OutlinedButton.styleFrom(
-                                    foregroundColor: const Color(0xffF6BD00),
-                                    side: const BorderSide(
-                                        color: Color(0xffF6BD00), width: 2),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    minimumSize: const Size(double.infinity, 50),
-                                  ),
-                                  onPressed: _previousPage,
-                                  child: const Text("Back"),
-                                ),
-                              ],
-                            )
-                          else
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: OutlinedButton(
-                                    style: OutlinedButton.styleFrom(
-                                      foregroundColor: const Color(0xffF6BD00),
-                                      side: const BorderSide(
-                                          color: Color(0xffF6BD00), width: 2),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(15),
-                                      ),
-                                      minimumSize: const Size(double.infinity, 50),
-                                    ),
-                                    onPressed: _previousPage,
-                                    child: const Text("Back"),
+                                  child: Text(
+                                    onboardingData[_currentPage]["button"]!,
                                   ),
                                 ),
-                                const SizedBox(width: 12),
-                                Expanded(
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: const Color(0xffF6BD00),
-                                      foregroundColor: const Color(0xff121312),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(15),
-                                      ),
-                                      minimumSize: const Size(double.infinity, 50),
-                                    ),
-                                    onPressed: _nextPage,
-                                    child: Text(
-                                      onboardingData[_currentPage]["button"]!,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            )
+                              ),
+                            ],
+                          ),
                       ],
                     ),
                   ),

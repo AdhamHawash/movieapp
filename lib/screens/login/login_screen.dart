@@ -8,6 +8,7 @@ import 'package:movieapp/screens/login/login_view_model.dart';
 import 'package:movieapp/screens/register/register_screen.dart';
 import 'package:movieapp/screens/forget_password.dart';
 import 'package:movieapp/core/states.dart';
+import 'package:movieapp/screens/update_profile/update_profile.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routeName = "login";
@@ -74,7 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
           }
           if (state is SucessState) {
             Navigator.of(context, rootNavigator: true).pop();
-            Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+            Navigator.pushReplacementNamed(context, UpdateProfileScreen.routeName);
           }
         },
         child: Scaffold(

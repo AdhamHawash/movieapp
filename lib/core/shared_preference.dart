@@ -19,4 +19,13 @@ class SharedPreference {
   static clear() async {
     await _prefs?.remove('token');
   }
+
+  static assignFirst() async {
+    await _prefs?.setBool("First", true);
+  }
+
+  static checkFirst() {
+    bool? first= _prefs?.getBool("First");
+    return first;
+  }
 }

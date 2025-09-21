@@ -1,8 +1,11 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:movieapp/screens/reset_password/reset_password.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
+  static const String routeName="updateProfile";
+
   const UpdateProfileScreen({super.key});
 
   @override
@@ -155,9 +158,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
               alignment: Alignment.centerLeft,
               child: TextButton(
                 onPressed: () {
-                  // Reset password action
+                  Navigator.pushNamed(context, ResetPassword.routeName);
                 },
-                child: const Text(
+                child: Text(
                   "Reset Password",
                   style: TextStyle(color: Colors.white),
                 ),

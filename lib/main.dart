@@ -2,12 +2,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movieapp/screens/onboarding.dart';
 import 'package:movieapp/screens/home_screen.dart';
 import 'package:movieapp/screens/login/login_screen.dart';
 import 'package:movieapp/screens/register/register_screen.dart';
 import 'package:movieapp/screens/forget_password.dart';
 import 'package:movieapp/core/shared_preference.dart';
 import 'package:movieapp/screens/reset_password/reset_password.dart';
+import 'package:movieapp/screens/update_profile/update_profile.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,6 +19,7 @@ void main() {
 
 class MovieApp extends StatelessWidget {
   String? token = SharedPreference.getUser();
+  bool? first = SharedPreference.checkFirst();
   MovieApp({super.key});
 
   @override
@@ -32,10 +35,16 @@ class MovieApp extends StatelessWidget {
           LoginScreen.routeName: (context) => LoginScreen(),
           ResetPassword.routeName: (context) => ResetPassword(),
           HomeScreen.routeName: (context) => HomeScreen(),
-          ForgetPassword.routeName:(context) => ForgetPassword(),
+          ForgetPassword.routeName: (context) => ForgetPassword(),
+          OnboardingScreen.routeName: (context) => OnboardingScreen(),
+          UpdateProfileScreen.routeName: (context) => UpdateProfileScreen(),
         },
-        initialRoute: 
-            token == null ? LoginScreen.routeName : HomeScreen.routeName,
+        initialRoute:
+            first == false
+                ? OnboardingScreen.routeName
+                : token == null
+                ? LoginScreen.routeName
+                : UpdateProfileScreen.routeName,
       ),
     );
   }
