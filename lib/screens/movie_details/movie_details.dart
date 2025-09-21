@@ -14,10 +14,21 @@ class MovieDetails extends StatelessWidget {
 
   MovieDetails({super.key});
 
+  TextStyle titlesStyle = GoogleFonts.roboto(
+    color: Colors.white,
+    fontSize: 24.sp,
+    fontWeight: FontWeight.bold,
+    height: 1.4.h,
+  );
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => viewModel..getDetails(10),
+      create:
+          (context) =>
+              viewModel
+                ..getDetails(10)
+                ..getSuggestions(10),
       child: BlocBuilder<MovieDetailsViewModel, States>(
         builder: (BuildContext context, States state) {
           if (state is LoadingState) {
@@ -36,7 +47,7 @@ class MovieDetails extends StatelessWidget {
                         Opacity(
                           opacity: 0.2,
                           child: Image.network(
-                            viewModel.movie!.largeCoverImage,
+                            viewModel.movie!.largeCoverImage ?? "",
                             fit: BoxFit.cover,
                             height: MediaQuery.of(context).size.height,
                           ),
@@ -56,20 +67,20 @@ class MovieDetails extends StatelessWidget {
                                 ],
                                 backgroundColor: Colors.transparent,
                               ),
-                              Image.asset(
-                                "assets/images/start.png",
-                                height:
-                                    MediaQuery.of(context).size.height * 0.6,
+                              GestureDetector(
+                                onTap: () {
+                                  viewModel.launch(viewModel.movie!.url);
+                                },
+                                child: Image.asset(
+                                  "assets/images/start.png",
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.6,
+                                ),
                               ),
                               Center(
                                 child: Text(
                                   viewModel.movie!.title,
-                                  style: GoogleFonts.roboto(
-                                    color: Colors.white,
-                                    fontSize: 24.sp,
-                                    fontWeight: FontWeight.bold,
-                                    height: 1.4,
-                                  ),
+                                  style: titlesStyle,
                                 ),
                               ),
                               Center(
@@ -90,7 +101,9 @@ class MovieDetails extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(16.r),
                                   ),
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                  viewModel.launch(viewModel.movie!.url);
+                                },
                                 child: Padding(
                                   padding: EdgeInsets.symmetric(vertical: 16.h),
                                   child: Text(
@@ -204,53 +217,94 @@ class MovieDetails extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         spacing: 16.h,
                         children: [
-                          Text(
-                            "Screen Shots",
-                            style: GoogleFonts.roboto(
-                              color: Colors.white,
-                              fontSize: 24.sp,
-                              fontWeight: FontWeight.bold,
-                              height: 1.4.h,
+                          Text("Screen Shots", style: titlesStyle),
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(16),
+                            child: Image.network(
+                              viewModel.movie!.largeScreenshot1 ?? "",
                             ),
                           ),
                           ClipRRect(
                             borderRadius: BorderRadius.circular(16),
                             child: Image.network(
-                              viewModel.movie!.largeScreenshot1,
+                              viewModel.movie!.largeScreenshot2 ?? "",
                             ),
                           ),
                           ClipRRect(
                             borderRadius: BorderRadius.circular(16),
                             child: Image.network(
-                              viewModel.movie!.largeScreenshot2,
+                              viewModel.movie!.largeScreenshot3 ?? "",
                             ),
                           ),
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(16),
-                            child: Image.network(
-                              viewModel.movie!.largeScreenshot3,
-                            ),
+                          Text("Similar", style: titlesStyle),
+                          Wrap(
+                            spacing: 20.w,
+                            runSpacing: 16.h,
+                            children:
+                                viewModel.movies.map((movie) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      Navigator.pushNamed(context, MovieDetails.routeName);
+                                    },
+                                    child: SizedBox(
+                                      width: 188.w,
+                                      height: 280.h,
+                                      child: Stack(
+                                        children: [
+                                          ClipRRect(
+                                            borderRadius: BorderRadius.circular(
+                                              16.r,
+                                            ),
+                                            child: Image.network(
+                                              movie.mediumCoverImage,
+                                              fit: BoxFit.cover,
+                                              width: double.infinity,
+                                              height: double.infinity,
+                                            ),
+                                          ),
+                                          Positioned(
+                                            top: 12.h,
+                                            left: 12.w,
+                                            child: Container(
+                                              padding: EdgeInsets.symmetric(
+                                                horizontal: 6.w,
+                                                vertical: 4.h,
+                                              ),
+                                              decoration: BoxDecoration(
+                                                color: Colors.black.withOpacity(
+                                                  0.7,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(10.r),
+                                              ),
+                                              child: Row(
+                                                children: [
+                                                  Text(
+                                                    movie.rating.toString(),
+                                                    style: GoogleFonts.roboto(
+                                                      color: Colors.white,
+                                                      fontSize: 16.sp,
+                                                    ),
+                                                  ),
+                                                  SizedBox(width: 2.w),
+                                                  Icon(
+                                                    Icons.star_rate_rounded,
+                                                    size: 22.sp,
+                                                    color: Color(0xffF6BD00),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                }).toList(),
                           ),
+                          Text("Summary", style: titlesStyle),
                           Text(
-                            "Similar",
-                            style: GoogleFonts.roboto(
-                              color: Colors.white,
-                              fontSize: 24.sp,
-                              fontWeight: FontWeight.bold,
-                              height: 1.4.h,
-                            ),
-                          ),
-                          Text(
-                            "Summary",
-                            style: GoogleFonts.roboto(
-                              color: Colors.white,
-                              fontSize: 24.sp,
-                              fontWeight: FontWeight.bold,
-                              height: 1.4.h,
-                            ),
-                          ),
-                          Text(
-                            viewModel.movie!.descriptionIntro,
+                            viewModel.movie!.descriptionIntro ?? "",
                             style: GoogleFonts.roboto(
                               color: Colors.white,
                               fontSize: 16.sp,
@@ -258,15 +312,7 @@ class MovieDetails extends StatelessWidget {
                               height: 1.4.h,
                             ),
                           ),
-                          Text(
-                            "Cast",
-                            style: GoogleFonts.roboto(
-                              color: Colors.white,
-                              fontSize: 24.sp,
-                              fontWeight: FontWeight.bold,
-                              height: 1.4.h,
-                            ),
-                          ),
+                          Text("Cast", style: titlesStyle),
                           ListView.separated(
                             shrinkWrap: true,
                             padding: EdgeInsets.zero,
@@ -290,7 +336,7 @@ class MovieDetails extends StatelessWidget {
                                         child: Image.network(
                                           viewModel
                                               .movie!
-                                              .cast[index]
+                                              .cast![index]
                                               .urlSmallImage,
                                           height: 70.h,
                                           width: 70.w,
@@ -304,7 +350,7 @@ class MovieDetails extends StatelessWidget {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              "Name : ${viewModel.movie!.cast[index].name}",
+                                              "Name : ${viewModel.movie!.cast![index].name}",
                                               style: GoogleFonts.roboto(
                                                 color: Colors.white,
                                                 fontSize: 20.sp,
@@ -312,7 +358,7 @@ class MovieDetails extends StatelessWidget {
                                             ),
                                             SizedBox(height: 10),
                                             Text(
-                                              "Character : ${viewModel.movie!.cast[index].characterName}",
+                                              "Character : ${viewModel.movie!.cast![index].characterName}",
                                               overflow: TextOverflow.ellipsis,
                                               maxLines: 1,
                                               style: GoogleFonts.roboto(
@@ -330,17 +376,9 @@ class MovieDetails extends StatelessWidget {
                             },
                             separatorBuilder:
                                 (context, index) => SizedBox(height: 16.h),
-                            itemCount: viewModel.movie!.cast.length,
+                            itemCount: viewModel.movie!.cast!.length,
                           ),
-                          Text(
-                            "Genres",
-                            style: GoogleFonts.roboto(
-                              color: Colors.white,
-                              fontSize: 24.sp,
-                              fontWeight: FontWeight.bold,
-                              height: 1.4.h,
-                            ),
-                          ),
+                          Text("Genres", style: titlesStyle),
                           Wrap(
                             spacing: 16.w,
                             runSpacing: 8.h,

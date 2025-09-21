@@ -1,23 +1,3 @@
-class MovieResponse {
-  final String status;
-  final String statusMessage;
-  final Movie movie;
-
-  MovieResponse({
-    required this.status,
-    required this.statusMessage,
-    required this.movie,
-  });
-
-  factory MovieResponse.fromJson(Map<String, dynamic> json) {
-    return MovieResponse(
-      status: json['status'] ?? '',
-      statusMessage: json['status_message'] ?? '',
-      movie: Movie.fromJson(json['data']['movie']),
-    );
-  }
-}
-
 class Movie {
   final int id;
   final String url;
@@ -30,9 +10,13 @@ class Movie {
   final double rating;
   final int runtime;
   final List<String> genres;
-  final int likeCount;
-  final String descriptionIntro;
+  final String summary;
+
+  final int? likeCount;
+  final String? descriptionIntro;
   final String descriptionFull;
+  final String? synopsis;
+
   final String ytTrailerCode;
   final String language;
   final String mpaRating;
@@ -40,18 +24,20 @@ class Movie {
   final String backgroundImageOriginal;
   final String smallCoverImage;
   final String mediumCoverImage;
-  final String largeCoverImage;
+
+  final String? state;
+  final String? largeCoverImage;
 
   // Screenshots
-  final String mediumScreenshot1;
-  final String mediumScreenshot2;
-  final String mediumScreenshot3;
-  final String largeScreenshot1;
-  final String largeScreenshot2;
-  final String largeScreenshot3;
+  final String? mediumScreenshot1;
+  final String? mediumScreenshot2;
+  final String? mediumScreenshot3;
+  final String? largeScreenshot1;
+  final String? largeScreenshot2;
+  final String? largeScreenshot3;
 
   // Cast + Torrents
-  final List<Cast> cast;
+  final List<Cast>? cast;
   final List<Torrent> torrents;
 
   final String dateUploaded;
@@ -69,9 +55,11 @@ class Movie {
     required this.rating,
     required this.runtime,
     required this.genres,
-    required this.likeCount,
-    required this.descriptionIntro,
+    required this.summary,
+    this.likeCount,
+    this.descriptionIntro,
     required this.descriptionFull,
+    this.synopsis,
     required this.ytTrailerCode,
     required this.language,
     required this.mpaRating,
@@ -79,14 +67,15 @@ class Movie {
     required this.backgroundImageOriginal,
     required this.smallCoverImage,
     required this.mediumCoverImage,
-    required this.largeCoverImage,
-    required this.mediumScreenshot1,
-    required this.mediumScreenshot2,
-    required this.mediumScreenshot3,
-    required this.largeScreenshot1,
-    required this.largeScreenshot2,
-    required this.largeScreenshot3,
-    required this.cast,
+    this.state,
+    this.largeCoverImage,
+    this.mediumScreenshot1,
+    this.mediumScreenshot2,
+    this.mediumScreenshot3,
+    this.largeScreenshot1,
+    this.largeScreenshot2,
+    this.largeScreenshot3,
+    this.cast,
     required this.torrents,
     required this.dateUploaded,
     required this.dateUploadedUnix,
@@ -107,9 +96,11 @@ class Movie {
           : (json['rating'] ?? 0.0).toDouble(),
       runtime: json['runtime'] ?? 0,
       genres: List<String>.from(json['genres'] ?? []),
-      likeCount: json['like_count'] ?? 0,
-      descriptionIntro: json['description_intro'] ?? '',
+      summary: json['summary'] ?? '',
+      likeCount: json['like_count'],
+      descriptionIntro: json['description_intro'],
       descriptionFull: json['description_full'] ?? '',
+      synopsis: json['synopsis'],
       ytTrailerCode: json['yt_trailer_code'] ?? '',
       language: json['language'] ?? '',
       mpaRating: json['mpa_rating'] ?? '',
@@ -117,26 +108,26 @@ class Movie {
       backgroundImageOriginal: json['background_image_original'] ?? '',
       smallCoverImage: json['small_cover_image'] ?? '',
       mediumCoverImage: json['medium_cover_image'] ?? '',
-      largeCoverImage: json['large_cover_image'] ?? '',
-      mediumScreenshot1: json['medium_screenshot_image1'] ?? '',
-      mediumScreenshot2: json['medium_screenshot_image2'] ?? '',
-      mediumScreenshot3: json['medium_screenshot_image3'] ?? '',
-      largeScreenshot1: json['large_screenshot_image1'] ?? '',
-      largeScreenshot2: json['large_screenshot_image2'] ?? '',
-      largeScreenshot3: json['large_screenshot_image3'] ?? '',
+      state: json['state'],
+      largeCoverImage: json['large_cover_image'],
+      mediumScreenshot1: json['medium_screenshot_image1'],
+      mediumScreenshot2: json['medium_screenshot_image2'],
+      mediumScreenshot3: json['medium_screenshot_image3'],
+      largeScreenshot1: json['large_screenshot_image1'],
+      largeScreenshot2: json['large_screenshot_image2'],
+      largeScreenshot3: json['large_screenshot_image3'],
       cast: (json['cast'] as List<dynamic>?)
-              ?.map((c) => Cast.fromJson(c))
-              .toList() ??
-          [],
-      torrents: (json['torrents'] as List<dynamic>?)
-              ?.map((t) => Torrent.fromJson(t))
-              .toList() ??
-          [],
+          ?.map((c) => Cast.fromJson(c))
+          .toList(),
+      torrents: (json['torrents'] as List<dynamic>? ?? [])
+          .map((t) => Torrent.fromJson(t))
+          .toList(),
       dateUploaded: json['date_uploaded'] ?? '',
       dateUploadedUnix: json['date_uploaded_unix'] ?? 0,
     );
   }
 }
+
 
 class Cast {
   final String name;
