@@ -33,13 +33,13 @@ class MovieApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         routes: {
           RegisterScreen.routeName: (_) => RegisterScreen(),
-          LoginScreen.routeName: (context) => LoginScreen(),
-          ResetPassword.routeName: (context) => ResetPassword(),
-          HomeScreen.routeName: (context) => HomeScreen(),
-          ForgetPassword.routeName: (context) => ForgetPassword(),
-          OnboardingScreen.routeName: (context) => OnboardingScreen(),
-          UpdateProfileScreen.routeName: (context) => UpdateProfileScreen(),
-          MovieDetails.routeName:(context)=> MovieDetails()
+          LoginScreen.routeName: (_) => LoginScreen(),
+          ResetPassword.routeName: (_) => ResetPassword(),
+          HomeScreen.routeName: (_) => HomeScreen(),
+          ForgetPassword.routeName: (_) => ForgetPassword(),
+          OnboardingScreen.routeName: (_) => OnboardingScreen(),
+          UpdateProfileScreen.routeName: (_) => UpdateProfileScreen(),
+          MovieDetails.routeName:(_)=> MovieDetails()
         },
         initialRoute:
             first == false
