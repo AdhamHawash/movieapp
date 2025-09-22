@@ -77,7 +77,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
               barrierDismissible: false,
               builder:
                   (_) => AlertDialog(
-                    content: Text("Error"),
+                    title: Text("Error"),
+                    content: Text(state.message),
                     actions: [
                       ElevatedButton(
                         onPressed: () {

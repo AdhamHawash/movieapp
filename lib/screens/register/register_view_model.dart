@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieapp/core/user_api_manager.dart';
 import 'package:movieapp/core/states.dart';
@@ -22,8 +23,10 @@ class RegisterViewModel extends Cubit<States> {
       if (response['message'] == "User created successfully") {
         emit(SucessState());
       }
-    } catch (e) {
-      emit(ErrorState());
+    } on DioException catch (e) {
+      emit(
+        ErrorState(e.response?.data["message"].toString() ?? "Unknown error"),
+      );
     }
   }
 }

@@ -117,8 +117,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
               context: context,
               barrierDismissible: false,
               builder:
-                  (_) => AlertDialog(
-                    content: Text("Error"),
+                  (_) =>AlertDialog(
+                    title: Text("Error"),
+                    content: Text(state.message),
                     actions: [
                       ElevatedButton(
                         onPressed: () {

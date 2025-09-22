@@ -34,7 +34,18 @@ class MovieDetails extends StatelessWidget {
           if (state is LoadingState) {
             return Center(child: CircularProgressIndicator());
           } else if (state is ErrorState) {
-            return Center(child: Text("Error"));
+            return AlertDialog(
+                    title: Text("Error"),
+                    content: Text(state.message),
+                    actions: [
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text("OK"),
+                      ),
+                    ],
+                  );
           } else {
             return Scaffold(
               backgroundColor: Color(0xff121312),

@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieapp/core/movies_api_manager.dart';
 import 'package:movieapp/core/states.dart';
@@ -23,8 +24,10 @@ class MovieDetailsViewModel extends Cubit<States> {
         movie = Movie.fromJson(response['data']['movie']);
         emit(SucessState());
       }
-    } catch (e) {
-      emit(ErrorState());
+    } on DioException catch (e) {
+      emit(
+        ErrorState(e.response?.data["message"].toString() ?? "Unknown error"),
+      );
     }
   }
 
@@ -40,8 +43,10 @@ class MovieDetailsViewModel extends Cubit<States> {
         movies = moviesJson.map((item) => Movie.fromJson(item)).toList();
         emit(SucessState());
       }
-    } catch (e) {
-      emit(ErrorState());
+    }on DioException catch (e) {
+      emit(
+        ErrorState(e.response?.data["message"].toString() ?? "Unknown error"),
+      );
     }
   }
 

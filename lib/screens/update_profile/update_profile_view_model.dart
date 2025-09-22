@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieapp/core/shared_preference.dart';
 import 'package:movieapp/core/states.dart';
@@ -18,8 +19,10 @@ class UpdateProfileViewModel extends Cubit<States> {
         profile = User.fromJson(response['data']);
         emit(SucessState());
       }
-    } catch (e) {
-      emit(ErrorState());
+    } on DioException catch (e) {
+      emit(
+        ErrorState(e.response?.data["message"].toString() ?? "Unknown error"),
+      );
     }
   }
 
@@ -46,8 +49,10 @@ class UpdateProfileViewModel extends Cubit<States> {
       if (response['message'] == "Profile updated successfully") {
         emit(SucessState());
       }
-    } catch (e) {
-      emit(ErrorState());
+    } on DioException catch (e) {
+      emit(
+        ErrorState(e.response?.data["message"].toString() ?? "Unknown error"),
+      );
     }
   }
 
@@ -60,8 +65,10 @@ class UpdateProfileViewModel extends Cubit<States> {
         SharedPreference.clear();
         emit(SucessState());
       }
-    } catch (e) {
-      emit(ErrorState());
+    } on DioException catch (e) {
+      emit(
+        ErrorState(e.response?.data["message"].toString() ?? "Unknown error"),
+      );
     }
   }
 }
