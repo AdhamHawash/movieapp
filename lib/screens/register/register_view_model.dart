@@ -1,11 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movieapp/core/api_manager.dart';
+import 'package:movieapp/core/user_api_manager.dart';
 import 'package:movieapp/core/states.dart';
 import 'package:movieapp/models/user_model.dart';
 
 class RegisterViewModel extends Cubit<States> {
   RegisterViewModel() : super(InitState());
-  ApiManager apimanager = ApiManager();
+  UserApiManager apimanager = UserApiManager();
 
   register(User user) async {
     try {
