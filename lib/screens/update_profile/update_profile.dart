@@ -67,7 +67,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   padding: const EdgeInsets.all(6),
                   decoration: BoxDecoration(
                     color:
-                        selectedAvatar == avatars[index]
+                        selectedAvatar == index
                             ? const Color(0xffF6BD00).withOpacity(0.56) //
                             : Colors.transparent,
                     border: Border.all(
@@ -117,8 +117,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
               context: context,
               barrierDismissible: false,
               builder:
-                  (_) => AlertDialog(
-                    content: Text("Error"),
+                  (_) =>AlertDialog(
+                    title: Text("Error"),
+                    content: Text(state.message),
                     actions: [
                       ElevatedButton(
                         onPressed: () {

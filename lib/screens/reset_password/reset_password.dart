@@ -55,7 +55,8 @@ class ResetPassword extends StatelessWidget {
               barrierDismissible: false,
               builder:
                   (_) => AlertDialog(
-                    content: Text("Error"),
+                    title: Text("Error"),
+                    content: Text(state.message),
                     actions: [
                       ElevatedButton(
                         onPressed: () {
