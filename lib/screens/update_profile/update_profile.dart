@@ -67,7 +67,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   padding: const EdgeInsets.all(6),
                   decoration: BoxDecoration(
                     color:
-                        selectedAvatar == avatars[index]
+                        selectedAvatar == index
                             ? const Color(0xffF6BD00).withOpacity(0.56) //
                             : Colors.transparent,
                     border: Border.all(

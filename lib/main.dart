@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, equal_keys_in_map
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -41,12 +41,12 @@ class MovieApp extends StatelessWidget {
           UpdateProfileScreen.routeName: (_) => UpdateProfileScreen(),
           MovieDetails.routeName:(_)=> MovieDetails()
         },
-        initialRoute:
+        initialRoute: 
             first == false
-                ? OnboardingScreen.routeName
+                ? OnboardingScreen.routeName 
                 : token == null
                 ? LoginScreen.routeName
-                : UpdateProfileScreen.routeName,
+                : HomeScreen.routeName,
       ),
     );
   }
