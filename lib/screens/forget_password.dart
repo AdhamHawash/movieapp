@@ -21,7 +21,9 @@ class ForgetPassword extends StatelessWidget {
                 children: [
                   IconButton(
                     icon: const Icon(Icons.arrow_back, color: Colors.amber),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                   ),
                   const SizedBox(width: 4),
                   Expanded(
@@ -40,7 +42,7 @@ class ForgetPassword extends StatelessWidget {
               const SizedBox(height: 16),
               Center(
                 child: Image.asset(
-                  'assets/images/Screenshot 2025-09-03 182540.png',
+                  'assets/images/forget_password.png',
                   height: 430,width: 430,
                   fit: BoxFit.contain,
                 ),

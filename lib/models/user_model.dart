@@ -20,11 +20,11 @@ class UserResponse {
 }
 
 class User {
-  final String email;
-  final String password;
-  final String name;
-  final String phone;
-  final int avaterId;
+  String email;
+  String password;
+  String name;
+  String phone;
+  int avaterId;
   String? id;
   DateTime? createdAt;
   DateTime? updatedAt;
