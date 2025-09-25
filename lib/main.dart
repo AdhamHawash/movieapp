@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movieapp/screens/onboarding.dart';
-import 'package:movieapp/screens/home_screen.dart';
+import 'package:movieapp/screens/home/home_screen.dart';
 import 'package:movieapp/screens/login/login_screen.dart';
 import 'package:movieapp/screens/movie_details/movie_details.dart';
 import 'package:movieapp/screens/register/register_screen.dart';
@@ -39,7 +39,7 @@ class MovieApp extends StatelessWidget {
           ForgetPassword.routeName: (context) => ForgetPassword(),
           OnboardingScreen.routeName: (context) => OnboardingScreen(),
           UpdateProfileScreen.routeName: (context) => UpdateProfileScreen(),
-          MovieDetails.routeName:(context)=> MovieDetails()
+          MovieDetails.routeName: (context) => MovieDetails(),
         },
         initialRoute:
             first == false
@@ -47,6 +47,7 @@ class MovieApp extends StatelessWidget {
                 : token == null
                 ? LoginScreen.routeName
                 : UpdateProfileScreen.routeName,
+
       ),
     );
   }

@@ -23,21 +23,22 @@ class MovieDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Get movie ID from arguments
+    final movieId = ModalRoute.of(context)!.settings.arguments as int;
+
     return BlocProvider(
-      create:
-          (context) =>
-              viewModel
-                ..getDetails(10)
-                ..getSuggestions(10),
+      create: (context) => viewModel
+        ..getDetails(movieId) // Use the movie ID from arguments
+        ..getSuggestions(movieId), // Use the movie ID from arguments
       child: BlocBuilder<MovieDetailsViewModel, States>(
         builder: (BuildContext context, States state) {
           if (state is LoadingState) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (state is ErrorState) {
-            return Center(child: Text("Error"));
+            return const Center(child: Text("Error"));
           } else {
             return Scaffold(
-              backgroundColor: Color(0xff121312),
+              backgroundColor: const Color(0xff121312),
               body: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -55,9 +56,8 @@ class MovieDetails extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 16.w),
                           child: Column(
-                            spacing: 16.h,
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
+                              SizedBox(height: 16.h), // Added spacing
                               AppBar(
                                 actions: [
                                   Icon(
@@ -73,8 +73,7 @@ class MovieDetails extends StatelessWidget {
                                 },
                                 child: Image.asset(
                                   "assets/images/start.png",
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.6,
+                                  height: MediaQuery.of(context).size.height * 0.6,
                                 ),
                               ),
                               Center(
@@ -87,16 +86,17 @@ class MovieDetails extends StatelessWidget {
                                 child: Text(
                                   viewModel.movie!.year.toString(),
                                   style: GoogleFonts.roboto(
-                                    color: Color(0xffADADAD),
+                                    color: const Color(0xffADADAD),
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20.sp,
                                     height: 1.2.h,
                                   ),
                                 ),
                               ),
+                              SizedBox(height: 16.h), // Added spacing
                               ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: Color(0xffE82626),
+                                  backgroundColor: const Color(0xffE82626),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(16.r),
                                   ),
@@ -116,25 +116,24 @@ class MovieDetails extends StatelessWidget {
                                   ),
                                 ),
                               ),
+                              SizedBox(height: 16.h), // Added spacing
                               Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Container(
                                     decoration: BoxDecoration(
-                                      color: Color(0xff282A28),
+                                      color: const Color(0xff282A28),
                                       borderRadius: BorderRadius.circular(16.r),
                                     ),
                                     width: 122.w,
                                     height: 48.h,
                                     child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                       children: [
                                         Icon(
                                           Icons.favorite,
                                           size: 28.sp,
-                                          color: Color(0xffF6BD00),
+                                          color: const Color(0xffF6BD00),
                                         ),
                                         Text(
                                           viewModel.movie!.likeCount.toString(),
@@ -150,19 +149,18 @@ class MovieDetails extends StatelessWidget {
                                   ),
                                   Container(
                                     decoration: BoxDecoration(
-                                      color: Color(0xff282A28),
+                                      color: const Color(0xff282A28),
                                       borderRadius: BorderRadius.circular(16.r),
                                     ),
                                     width: 122.w,
                                     height: 48.h,
                                     child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                       children: [
                                         Icon(
                                           Icons.access_time_filled,
-                                          size: 28,
-                                          color: Color(0xffF6BD00),
+                                          size: 28.sp,
+                                          color: const Color(0xffF6BD00),
                                         ),
                                         Text(
                                           viewModel.movie!.runtime.toString(),
@@ -178,19 +176,18 @@ class MovieDetails extends StatelessWidget {
                                   ),
                                   Container(
                                     decoration: BoxDecoration(
-                                      color: Color(0xff282A28),
+                                      color: const Color(0xff282A28),
                                       borderRadius: BorderRadius.circular(16.r),
                                     ),
                                     width: 122.w,
                                     height: 48.h,
                                     child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                       children: [
                                         Icon(
                                           Icons.star_rate_rounded,
                                           size: 34.r,
-                                          color: Color(0xffF6BD00),
+                                          color: const Color(0xffF6BD00),
                                         ),
                                         Text(
                                           viewModel.movie!.rating.toString(),
@@ -206,6 +203,7 @@ class MovieDetails extends StatelessWidget {
                                   ),
                                 ],
                               ),
+                              SizedBox(height: 16.h), // Added spacing
                             ],
                           ),
                         ),
@@ -215,96 +213,113 @@ class MovieDetails extends StatelessWidget {
                       padding: EdgeInsets.all(16.r),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        spacing: 16.h,
                         children: [
+                          SizedBox(height: 16.h),
                           Text("Screen Shots", style: titlesStyle),
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(16),
-                            child: Image.network(
-                              viewModel.movie!.largeScreenshot1 ?? "",
+                          SizedBox(height: 16.h),
+                          if (viewModel.movie!.largeScreenshot1 != null && viewModel.movie!.largeScreenshot1!.isNotEmpty)
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(16.r),
+                              child: Image.network(
+                                viewModel.movie!.largeScreenshot1!,
+                                height: 200.h,
+                                width: double.infinity,
+                                fit: BoxFit.cover,
+                              ),
                             ),
-                          ),
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(16),
-                            child: Image.network(
-                              viewModel.movie!.largeScreenshot2 ?? "",
+                          SizedBox(height: 16.h),
+                          if (viewModel.movie!.largeScreenshot2 != null && viewModel.movie!.largeScreenshot2!.isNotEmpty)
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(16.r),
+                              child: Image.network(
+                                viewModel.movie!.largeScreenshot2!,
+                                height: 200.h,
+                                width: double.infinity,
+                                fit: BoxFit.cover,
+                              ),
                             ),
-                          ),
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(16),
-                            child: Image.network(
-                              viewModel.movie!.largeScreenshot3 ?? "",
+                          SizedBox(height: 16.h),
+                          if (viewModel.movie!.largeScreenshot3 != null && viewModel.movie!.largeScreenshot3!.isNotEmpty)
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(16.r),
+                              child: Image.network(
+                                viewModel.movie!.largeScreenshot3!,
+                                height: 200.h,
+                                width: double.infinity,
+                                fit: BoxFit.cover,
+                              ),
                             ),
-                          ),
+                          SizedBox(height: 16.h),
                           Text("Similar", style: titlesStyle),
+                          SizedBox(height: 16.h),
                           Wrap(
                             spacing: 20.w,
                             runSpacing: 16.h,
-                            children:
-                                viewModel.movies.map((movie) {
-                                  return GestureDetector(
-                                    onTap: () {
-                                      Navigator.pushNamed(context, MovieDetails.routeName);
-                                    },
-                                    child: SizedBox(
-                                      width: 188.w,
-                                      height: 280.h,
-                                      child: Stack(
-                                        children: [
-                                          ClipRRect(
-                                            borderRadius: BorderRadius.circular(
-                                              16.r,
-                                            ),
-                                            child: Image.network(
-                                              movie.mediumCoverImage,
-                                              fit: BoxFit.cover,
-                                              width: double.infinity,
-                                              height: double.infinity,
-                                            ),
-                                          ),
-                                          Positioned(
-                                            top: 12.h,
-                                            left: 12.w,
-                                            child: Container(
-                                              padding: EdgeInsets.symmetric(
-                                                horizontal: 6.w,
-                                                vertical: 4.h,
-                                              ),
-                                              decoration: BoxDecoration(
-                                                color: Colors.black.withOpacity(
-                                                  0.7,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(10.r),
-                                              ),
-                                              child: Row(
-                                                children: [
-                                                  Text(
-                                                    movie.rating.toString(),
-                                                    style: GoogleFonts.roboto(
-                                                      color: Colors.white,
-                                                      fontSize: 16.sp,
-                                                    ),
-                                                  ),
-                                                  SizedBox(width: 2.w),
-                                                  Icon(
-                                                    Icons.star_rate_rounded,
-                                                    size: 22.sp,
-                                                    color: Color(0xffF6BD00),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
+                            children: viewModel.movies.map((movie) {
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.pushNamed(
+                                    context,
+                                    MovieDetails.routeName,
+                                    arguments: movie.id, // Pass the new movie ID
                                   );
-                                }).toList(),
+                                },
+                                child: SizedBox(
+                                  width: 188.w,
+                                  height: 280.h,
+                                  child: Stack(
+                                    children: [
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.circular(16.r),
+                                        child: Image.network(
+                                          movie.mediumCoverImage,
+                                          fit: BoxFit.cover,
+                                          width: double.infinity,
+                                          height: double.infinity,
+                                        ),
+                                      ),
+                                      Positioned(
+                                        top: 12.h,
+                                        left: 12.w,
+                                        child: Container(
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: 6.w,
+                                            vertical: 4.h,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            color: Colors.black.withOpacity(0.7),
+                                            borderRadius: BorderRadius.circular(10.r),
+                                          ),
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                movie.rating.toString(),
+                                                style: GoogleFonts.roboto(
+                                                  color: Colors.white,
+                                                  fontSize: 16.sp,
+                                                ),
+                                              ),
+                                              SizedBox(width: 2.w),
+                                              Icon(
+                                                Icons.star_rate_rounded,
+                                                size: 22.sp,
+                                                color: const Color(0xffF6BD00),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            }).toList(),
                           ),
+                          SizedBox(height: 16.h),
                           Text("Summary", style: titlesStyle),
+                          SizedBox(height: 16.h),
                           Text(
-                            viewModel.movie!.descriptionIntro ?? "",
+                            viewModel.movie!.descriptionIntro ?? viewModel.movie!.summary,
                             style: GoogleFonts.roboto(
                               color: Colors.white,
                               fontSize: 16.sp,
@@ -312,100 +327,96 @@ class MovieDetails extends StatelessWidget {
                               height: 1.4.h,
                             ),
                           ),
-                          Text("Cast", style: titlesStyle),
-                          ListView.separated(
-                            shrinkWrap: true,
-                            padding: EdgeInsets.zero,
-                            physics: NeverScrollableScrollPhysics(),
-                            itemBuilder: (context, index) {
-                              return Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(16.r),
-                                  color: Color(0xff282A28),
-                                ),
-                                child: Padding(
-                                  padding: EdgeInsets.all(12.r),
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(
-                                          10.r,
-                                        ),
-                                        child: Image.network(
-                                          viewModel
-                                              .movie!
-                                              .cast![index]
-                                              .urlSmallImage,
-                                          height: 70.h,
-                                          width: 70.w,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                      SizedBox(width: 10.w),
-                                      Expanded(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "Name : ${viewModel.movie!.cast![index].name}",
-                                              style: GoogleFonts.roboto(
-                                                color: Colors.white,
-                                                fontSize: 20.sp,
-                                              ),
-                                            ),
-                                            SizedBox(height: 10),
-                                            Text(
-                                              "Character : ${viewModel.movie!.cast![index].characterName}",
-                                              overflow: TextOverflow.ellipsis,
-                                              maxLines: 1,
-                                              style: GoogleFonts.roboto(
-                                                color: Colors.white,
-                                                fontSize: 20.sp,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
+                          SizedBox(height: 16.h),
+                          if (viewModel.movie!.cast != null && viewModel.movie!.cast!.isNotEmpty) ...[
+                            Text("Cast", style: titlesStyle),
+                            SizedBox(height: 16.h),
+                            ListView.separated(
+                              shrinkWrap: true,
+                              padding: EdgeInsets.zero,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemBuilder: (context, index) {
+                                return Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(16.r),
+                                    color: const Color(0xff282A28),
                                   ),
-                                ),
-                              );
-                            },
-                            separatorBuilder:
-                                (context, index) => SizedBox(height: 16.h),
-                            itemCount: viewModel.movie!.cast!.length,
-                          ),
+                                  child: Padding(
+                                    padding: EdgeInsets.all(12.r),
+                                    child: Row(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius: BorderRadius.circular(10.r),
+                                          child: Image.network(
+                                            viewModel.movie!.cast![index].urlSmallImage,
+                                            height: 70.h,
+                                            width: 70.w,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                        SizedBox(width: 10.w),
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "Name : ${viewModel.movie!.cast![index].name}",
+                                                style: GoogleFonts.roboto(
+                                                  color: Colors.white,
+                                                  fontSize: 20.sp,
+                                                ),
+                                              ),
+                                              SizedBox(height: 10.h),
+                                              Text(
+                                                "Character : ${viewModel.movie!.cast![index].characterName}",
+                                                overflow: TextOverflow.ellipsis,
+                                                maxLines: 1,
+                                                style: GoogleFonts.roboto(
+                                                  color: Colors.white,
+                                                  fontSize: 20.sp,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                              separatorBuilder: (context, index) => SizedBox(height: 16.h),
+                              itemCount: viewModel.movie!.cast!.length,
+                            ),
+                            SizedBox(height: 16.h),
+                          ],
                           Text("Genres", style: titlesStyle),
+                          SizedBox(height: 16.h),
                           Wrap(
                             spacing: 16.w,
                             runSpacing: 8.h,
-                            children:
-                                viewModel.movie!.genres.map((genre) {
-                                  return Container(
-                                    width: 122.w,
-                                    height: 36.h,
-                                    padding: EdgeInsets.symmetric(
-                                      vertical: 8.h,
+                            children: viewModel.movie!.genres.map((genre) {
+                              return Container(
+                                width: 122.w,
+                                height: 36.h,
+                                padding: EdgeInsets.symmetric(vertical: 8.h),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12.r),
+                                  color: const Color(0xff282A28),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    genre,
+                                    style: GoogleFonts.roboto(
+                                      color: Colors.white,
+                                      fontSize: 16.sp,
                                     ),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(12.r),
-                                      color: Color(0xff282A28),
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        genre,
-                                        style: GoogleFonts.roboto(
-                                          color: Colors.white,
-                                          fontSize: 16.sp,
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                }).toList(),
+                                  ),
+                                ),
+                              );
+                            }).toList(),
                           ),
+                          SizedBox(height: 16.h),
                         ],
                       ),
                     ),
