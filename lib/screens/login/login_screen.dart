@@ -8,7 +8,6 @@ import 'package:movieapp/screens/login/login_view_model.dart';
 import 'package:movieapp/screens/register/register_screen.dart';
 import 'package:movieapp/screens/forget_password.dart';
 import 'package:movieapp/core/states.dart';
-import 'package:movieapp/screens/update_profile/update_profile.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routeName = "login";
@@ -30,6 +29,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
   TextEditingController passwordController = TextEditingController();
 
+  OutlineInputBorder inputBorder = OutlineInputBorder(
+    borderRadius: BorderRadius.circular(16.r),
+    borderSide: BorderSide(color: Color(0xff282A28)),
+  );
+
   LoginViewModel loginViewModel = LoginViewModel();
 
   @override
@@ -43,11 +47,11 @@ class _LoginScreenState extends State<LoginScreen> {
               context: context,
               barrierDismissible: false,
               builder:
-                  (_) => const AlertDialog(
+                  (_) => AlertDialog(
                     content: Row(
                       children: [
                         CircularProgressIndicator(),
-                        SizedBox(width: 16),
+                        SizedBox(width: 16.w),
                         Text("Loading..."),
                       ],
                     ),
@@ -61,7 +65,8 @@ class _LoginScreenState extends State<LoginScreen> {
               barrierDismissible: false,
               builder:
                   (_) => AlertDialog(
-                    content: Text("Error"),
+                    title: Text("Error"),
+                    content: Text(state.message),
                     actions: [
                       ElevatedButton(
                         onPressed: () {
@@ -75,7 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
           }
           if (state is SucessState) {
             Navigator.of(context, rootNavigator: true).pop();
-            Navigator.pushReplacementNamed(context, UpdateProfileScreen.routeName);
+            Navigator.pushReplacementNamed(context, HomeScreen.routeName);
           }
         },
         child: Scaffold(
@@ -116,24 +121,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             cursorColor: Colors.white,
                             decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(16.r),
-                                borderSide: BorderSide(
-                                  color: Color(0xff282A28),
-                                ),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(16.r),
-                                borderSide: BorderSide(
-                                  color: Color(0xff282A28),
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(16.r),
-                                borderSide: BorderSide(
-                                  color: Color(0xff282A28),
-                                ),
-                              ),
+                              border:inputBorder,
+                              enabledBorder:inputBorder,
+                              focusedBorder:inputBorder,
                               filled: true,
                               fillColor: Color(0xff282A28),
                               hintText: "Email",
@@ -163,24 +153,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             obscureText: hideText,
                             cursorColor: Colors.white,
                             decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(16.r),
-                                borderSide: BorderSide(
-                                  color: Color(0xff282A28),
-                                ),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(16.r),
-                                borderSide: BorderSide(
-                                  color: Color(0xff282A28),
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(16.r),
-                                borderSide: BorderSide(
-                                  color: Color(0xff282A28),
-                                ),
-                              ),
+                              border:inputBorder,
+                              enabledBorder:inputBorder,
+                              focusedBorder:inputBorder,
                               filled: true,
                               fillColor: Color(0xff282A28),
 

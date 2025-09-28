@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieapp/core/user_api_manager.dart';
 import 'package:movieapp/core/shared_preference.dart';
@@ -10,7 +11,7 @@ class LoginViewModel extends Cubit<States> {
   login(String email, String password) async {
     try {
       emit(LoadingState());
-      Map<String,dynamic> response;
+      Map<String, dynamic> response;
       response = await apimanager.postHttp("auth/login", {
         "email": email,
         "password": password,
@@ -19,8 +20,10 @@ class LoginViewModel extends Cubit<States> {
         SharedPreference.setUser(response['data']);
         emit(SucessState());
       }
-    } catch (e) {
-      emit(ErrorState());
+    } on DioException catch (e) {
+      emit(
+        ErrorState(e.response?.data["message"].toString() ?? "Unknown error"),
+      );
     }
   }
 }

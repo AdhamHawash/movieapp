@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, deprecated_member_use
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,7 +35,18 @@ class MovieDetails extends StatelessWidget {
           if (state is LoadingState) {
             return const Center(child: CircularProgressIndicator());
           } else if (state is ErrorState) {
-            return const Center(child: Text("Error"));
+            return AlertDialog(
+                    title: Text("Error"),
+                    content: Text(state.message),
+                    actions: [
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text("OK"),
+                      ),
+                    ],
+                  );
           } else {
             return Scaffold(
               backgroundColor: const Color(0xff121312),

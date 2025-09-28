@@ -25,6 +25,16 @@ class ResetPassword extends StatelessWidget {
 
   ResetPasswordViewModel resetPasswordViewModel = ResetPasswordViewModel();
 
+  OutlineInputBorder inputBorder = OutlineInputBorder(
+    borderRadius: BorderRadius.circular(16.r),
+    borderSide: BorderSide(color: Color(0xff282A28)),
+  );
+
+  TextStyle fontStyle = GoogleFonts.roboto(
+    fontSize: 16.sp,
+    color: Colors.white,
+  );
+
   ResetPassword({super.key});
   @override
   Widget build(BuildContext context) {
@@ -37,11 +47,11 @@ class ResetPassword extends StatelessWidget {
               context: context,
               barrierDismissible: false,
               builder:
-                  (_) => const AlertDialog(
+                  (_) => AlertDialog(
                     content: Row(
                       children: [
                         CircularProgressIndicator(),
-                        SizedBox(width: 16),
+                        SizedBox(width: 16.w),
                         Text("Loading..."),
                       ],
                     ),
@@ -55,7 +65,8 @@ class ResetPassword extends StatelessWidget {
               barrierDismissible: false,
               builder:
                   (_) => AlertDialog(
-                    content: Text("Error"),
+                    title: Text("Error"),
+                    content: Text(state.message),
                     actions: [
                       ElevatedButton(
                         onPressed: () {
@@ -107,41 +118,17 @@ class ResetPassword extends StatelessWidget {
                                 }
                                 return null;
                               },
-                              style: GoogleFonts.roboto(
-                                fontSize: 16.sp,
-                                color: Colors.white,
-                              ),
+                              style:fontStyle,
                               cursorColor: Colors.white,
                               decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(16.r),
-                                  borderSide: BorderSide(
-                                    color: Color(0xff282A28),
-                                  ),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(16.r),
-                                  borderSide: BorderSide(
-                                    color: Color(0xff282A28),
-                                  ),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(16.r),
-                                  borderSide: BorderSide(
-                                    color: Color(0xff282A28),
-                                  ),
-                                ),
+                                border: inputBorder,
+                                enabledBorder: inputBorder,
+                                focusedBorder: inputBorder,
                                 filled: true,
                                 fillColor: Color(0xff282A28),
                                 labelText: "Current password",
-                                floatingLabelStyle: GoogleFonts.roboto(
-                                  color: Colors.white,
-                                  fontSize: 16.sp,
-                                ),
-                                labelStyle: GoogleFonts.roboto(
-                                  color: Colors.white,
-                                  fontSize: 16.sp,
-                                ),
+                                floatingLabelStyle: fontStyle,
+                                labelStyle: fontStyle,
                               ),
                             ),
                           ),
@@ -155,41 +142,17 @@ class ResetPassword extends StatelessWidget {
                                 }
                                 return null;
                               },
-                              style: GoogleFonts.roboto(
-                                fontSize: 16.sp,
-                                color: Colors.white,
-                              ),
+                              style:fontStyle,
                               cursorColor: Colors.white,
                               decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(16.r),
-                                  borderSide: BorderSide(
-                                    color: Color(0xff282A28),
-                                  ),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(16.r),
-                                  borderSide: BorderSide(
-                                    color: Color(0xff282A28),
-                                  ),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(16.r),
-                                  borderSide: BorderSide(
-                                    color: Color(0xff282A28),
-                                  ),
-                                ),
+                                border: inputBorder,
+                                enabledBorder: inputBorder,
+                                focusedBorder: inputBorder,
                                 filled: true,
                                 fillColor: Color(0xff282A28),
                                 labelText: "New password",
-                                floatingLabelStyle: GoogleFonts.roboto(
-                                  color: Colors.white,
-                                  fontSize: 16.sp,
-                                ),
-                                labelStyle: GoogleFonts.roboto(
-                                  color: Colors.white,
-                                  fontSize: 16.sp,
-                                ),
+                                floatingLabelStyle: fontStyle,
+                                labelStyle: fontStyle,
                               ),
                             ),
                           ),
@@ -206,41 +169,17 @@ class ResetPassword extends StatelessWidget {
                                 }
                                 return null;
                               },
-                              style: GoogleFonts.roboto(
-                                fontSize: 16.sp,
-                                color: Colors.white,
-                              ),
+                              style:fontStyle,
                               cursorColor: Colors.white,
                               decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(16.r),
-                                  borderSide: BorderSide(
-                                    color: Color(0xff282A28),
-                                  ),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(16.r),
-                                  borderSide: BorderSide(
-                                    color: Color(0xff282A28),
-                                  ),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(16.r),
-                                  borderSide: BorderSide(
-                                    color: Color(0xff282A28),
-                                  ),
-                                ),
+                                border: inputBorder,
+                                enabledBorder: inputBorder,
+                                focusedBorder: inputBorder,
                                 filled: true,
                                 fillColor: Color(0xff282A28),
                                 labelText: "Confirm password",
-                                floatingLabelStyle: GoogleFonts.roboto(
-                                  color: Colors.white,
-                                  fontSize: 16.sp,
-                                ),
-                                labelStyle: GoogleFonts.roboto(
-                                  color: Colors.white,
-                                  fontSize: 16.sp,
-                                ),
+                                floatingLabelStyle: fontStyle,
+                                labelStyle: fontStyle,
                               ),
                             ),
                           ),

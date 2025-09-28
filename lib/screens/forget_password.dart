@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class ForgetPassword extends StatelessWidget {
-  static const String routeName="forgetPassword";
+  static const String routeName = "forgetPassword";
   static const Color bg = Colors.black;
   static const Color accent = Color(0xFFF6BD00);
   static const Color fieldBg = Color(0xFF282A28);
@@ -13,70 +15,73 @@ class ForgetPassword extends StatelessWidget {
       backgroundColor: bg,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
+          padding: EdgeInsets.all(20.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [
                   IconButton(
-                    icon: const Icon(Icons.arrow_back, color: Colors.amber),
+                    icon: Icon(Icons.arrow_back, color: Colors.amber),
                     onPressed: () {
                       Navigator.pop(context);
                     },
                   ),
-                  const SizedBox(width: 4),
+                  SizedBox(width: 4.w),
                   Expanded(
                     child: Text(
                       'Forget Password',
                       textAlign: TextAlign.center,
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: accent,
                         fontWeight: FontWeight.w400,
                       ),
                     ),
                   ),
-                  const SizedBox(width: 48),
+                  SizedBox(width: 48.w),
                 ],
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16.h),
               Center(
                 child: Image.asset(
                   'assets/images/forget_password.png',
-                  height: 430,width: 430,
+                  height: 430.h,
+                  width: 430.w,
                   fit: BoxFit.contain,
                 ),
               ),
-              const SizedBox(height: 32),
+              SizedBox(height: 32.h),
               Container(
                 decoration: BoxDecoration(
                   color: fieldBg,
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(16.r),
                 ),
                 child: TextField(
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white,
-                    fontSize: 16,
+                    fontSize: 16.sp,
                     fontWeight: FontWeight.w600,
                   ),
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
-                    contentPadding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                    contentPadding: EdgeInsets.symmetric(
+                      horizontal: 16.w,
+                      vertical: 16.h,
+                    ),
                     hintText: 'Email',
-                    hintStyle: const TextStyle(
+                    hintStyle: TextStyle(
                       color: hint,
                       fontWeight: FontWeight.w400,
                     ),
-                    prefixIcon: const Icon(Icons.mail_rounded, color: Colors.white),
+                    prefixIcon: Icon(Icons.mail_rounded, color: Colors.white),
                     border: InputBorder.none,
                   ),
                 ),
               ),
-              const SizedBox(height: 24),
+              SizedBox(height: 24.h),
               SizedBox(
                 width: double.infinity,
-                height: 55.72,
+                height: 55.72.h,
                 child: ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
@@ -84,18 +89,17 @@ class ForgetPassword extends StatelessWidget {
                     foregroundColor: Colors.black,
                     elevation: 0,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: BorderRadius.circular(16.r),
                     ),
-                    textStyle: const TextStyle(
-                      fontWeight: FontWeight.w400,
-                    ),
+                    textStyle: TextStyle(fontWeight: FontWeight.w400),
                   ),
-                  child: const Text('Verify Email'),
+                  child: Text('Verify Email'),
                 ),
               ),
             ],
           ),
         ),
-      ),);
+      ),
+    );
   }
 }
