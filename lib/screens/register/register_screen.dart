@@ -46,6 +46,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
     "assets/images/avatar9.png",
   ];
 
+  OutlineInputBorder inputBorder = OutlineInputBorder(
+    borderRadius: BorderRadius.circular(16.r),
+    borderSide: BorderSide(color: Color(0xff282A28)),
+  );
+
+  TextStyle fontStyle = GoogleFonts.roboto(
+    fontSize: 16.sp,
+    color: Colors.white,
+  );
+
   RegisterViewModel viewModel = RegisterViewModel();
 
   @override
@@ -59,11 +69,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
               context: context,
               barrierDismissible: false,
               builder:
-                  (_) => const AlertDialog(
+                  (_) => AlertDialog(
                     content: Row(
                       children: [
                         CircularProgressIndicator(),
-                        SizedBox(width: 16),
+                        SizedBox(width: 16.w),
                         Text("Loading..."),
                       ],
                     ),
@@ -118,7 +128,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   spacing: 26.h,
                   children: [
                     CarouselSlider(
-                      options: CarouselOptions(height: 160.0,enlargeCenterPage: true,viewportFraction: 0.4),
+                      options: CarouselOptions(
+                        height: 160.0.h,
+                        enlargeCenterPage: true,
+                        viewportFraction: 0.4.w,
+                      ),
                       items: [
                         for (var i = 0; i < 9; i++)
                           Container(
@@ -154,37 +168,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               }
                               return null;
                             },
-                            style: GoogleFonts.roboto(
-                              fontSize: 16.sp,
-                              color: Colors.white,
-                            ),
+                            style: fontStyle,
                             cursorColor: Colors.white,
                             decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(16.r),
-                                borderSide: BorderSide(
-                                  color: Color(0xff282A28),
-                                ),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(16.r),
-                                borderSide: BorderSide(
-                                  color: Color(0xff282A28),
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(16.r),
-                                borderSide: BorderSide(
-                                  color: Color(0xff282A28),
-                                ),
-                              ),
+                              border: inputBorder,
+                              enabledBorder: inputBorder,
+                              focusedBorder: inputBorder,
                               filled: true,
                               fillColor: Color(0xff282A28),
                               hintText: "Name",
-                              hintStyle: GoogleFonts.roboto(
-                                fontSize: 16.sp,
-                                color: Colors.white,
-                              ),
+                              hintStyle: fontStyle,
                               prefixIcon: Icon(
                                 Icons.perm_identity_rounded,
                                 color: Colors.white,
@@ -205,37 +198,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               }
                               return null;
                             },
-                            style: GoogleFonts.roboto(
-                              fontSize: 16.sp,
-                              color: Colors.white,
-                            ),
+                            style: fontStyle,
                             cursorColor: Colors.white,
                             decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(16.r),
-                                borderSide: BorderSide(
-                                  color: Color(0xff282A28),
-                                ),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(16.r),
-                                borderSide: BorderSide(
-                                  color: Color(0xff282A28),
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(16.r),
-                                borderSide: BorderSide(
-                                  color: Color(0xff282A28),
-                                ),
-                              ),
+                              border: inputBorder,
+                              enabledBorder: inputBorder,
+                              focusedBorder: inputBorder,
                               filled: true,
                               fillColor: Color(0xff282A28),
                               hintText: "Email",
-                              hintStyle: GoogleFonts.roboto(
-                                fontSize: 16.sp,
-                                color: Colors.white,
-                              ),
+                              hintStyle: fontStyle,
                               prefixIcon: Icon(
                                 Icons.email,
                                 color: Colors.white,
@@ -251,38 +223,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               }
                               return null;
                             },
-                            style: GoogleFonts.roboto(
-                              fontSize: 16.sp,
-                              color: Colors.white,
-                            ),
+                            style: fontStyle,
                             obscureText: hideText,
                             cursorColor: Colors.white,
                             decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(16.r),
-                                borderSide: BorderSide(
-                                  color: Color(0xff282A28),
-                                ),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(16.r),
-                                borderSide: BorderSide(
-                                  color: Color(0xff282A28),
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(16.r),
-                                borderSide: BorderSide(
-                                  color: Color(0xff282A28),
-                                ),
-                              ),
+                              border: inputBorder,
+                              enabledBorder: inputBorder,
+                              focusedBorder: inputBorder,
                               filled: true,
                               fillColor: Color(0xff282A28),
 
-                              hintStyle: GoogleFonts.roboto(
-                                fontSize: 16.sp,
-                                color: Colors.white,
-                              ),
+                              hintStyle: fontStyle,
                               hintText: "Password",
                               prefixIcon: Icon(
                                 Icons.lock,
@@ -316,38 +267,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               }
                               return null;
                             },
-                            style: GoogleFonts.roboto(
-                              fontSize: 16.sp,
-                              color: Colors.white,
-                            ),
+                            style: fontStyle,
                             obscureText: reHideText,
                             cursorColor: Colors.white,
                             decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(16.r),
-                                borderSide: BorderSide(
-                                  color: Color(0xff282A28),
-                                ),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(16.r),
-                                borderSide: BorderSide(
-                                  color: Color(0xff282A28),
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(16.r),
-                                borderSide: BorderSide(
-                                  color: Color(0xff282A28),
-                                ),
-                              ),
+                              border: inputBorder,
+                              enabledBorder: inputBorder,
+                              focusedBorder: inputBorder,
                               filled: true,
                               fillColor: Color(0xff282A28),
 
-                              hintStyle: GoogleFonts.roboto(
-                                fontSize: 16.sp,
-                                color: Colors.white,
-                              ),
+                              hintStyle: fontStyle,
                               hintText: "Confirm Password",
                               prefixIcon: Icon(
                                 Icons.lock,
@@ -381,37 +311,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               }
                               return null;
                             },
-                            style: GoogleFonts.roboto(
-                              fontSize: 16.sp,
-                              color: Colors.white,
-                            ),
+                            style: fontStyle,
                             cursorColor: Colors.white,
                             decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(16.r),
-                                borderSide: BorderSide(
-                                  color: Color(0xff282A28),
-                                ),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(16.r),
-                                borderSide: BorderSide(
-                                  color: Color(0xff282A28),
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(16.r),
-                                borderSide: BorderSide(
-                                  color: Color(0xff282A28),
-                                ),
-                              ),
+                              border: inputBorder,
+                              enabledBorder: inputBorder,
+                              focusedBorder: inputBorder,
                               filled: true,
                               fillColor: Color(0xff282A28),
                               hintText: "phone",
-                              hintStyle: GoogleFonts.roboto(
-                                fontSize: 16.sp,
-                                color: Colors.white,
-                              ),
+                              hintStyle: fontStyle,
                               prefixIcon: Icon(
                                 Icons.phone,
                                 color: Colors.white,
@@ -428,7 +337,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),
                             onPressed: () {
                               if (formKey.currentState!.validate()) {
-                                User user =User(email: emailController.text, password: passwordController.text, name: nameController.text, phone: phoneController.text, avaterId: selectedAvatar);
+                                User user = User(
+                                  email: emailController.text,
+                                  password: passwordController.text,
+                                  name: nameController.text,
+                                  phone: phoneController.text,
+                                  avaterId: selectedAvatar,
+                                );
                                 viewModel.register(user);
                               }
                             },

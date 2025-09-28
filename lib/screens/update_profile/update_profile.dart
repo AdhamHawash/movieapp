@@ -6,6 +6,7 @@ import 'package:movieapp/core/states.dart';
 import 'package:movieapp/screens/login/login_screen.dart';
 import 'package:movieapp/screens/reset_password/reset_password.dart';
 import 'package:movieapp/screens/update_profile/update_profile_view_model.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
   static const String routeName = "updateProfile";
@@ -41,19 +42,19 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
     showModalBottomSheet(
       context: context,
       backgroundColor: Color(0xff282A28),
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
       ),
       builder: (context) {
         return Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: EdgeInsets.all(16.0.w),
           child: GridView.builder(
             shrinkWrap: true,
             itemCount: avatars.length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
-              crossAxisSpacing: 12,
-              mainAxisSpacing: 12,
+              crossAxisSpacing: 12.w,
+              mainAxisSpacing: 12.h,
             ),
             itemBuilder: (context, index) {
               return GestureDetector(
@@ -64,20 +65,20 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   Navigator.pop(context);
                 },
                 child: Container(
-                  padding: const EdgeInsets.all(6),
+                  padding: EdgeInsets.all(6.w),
                   decoration: BoxDecoration(
                     color:
                         selectedAvatar == index
-                            ? const Color(0xffF6BD00).withOpacity(0.56) //
+                            ? Color(0xffF6BD00).withOpacity(0.56) //
                             : Colors.transparent,
                     border: Border.all(
                       color: const Color(0xffF6BD00),
-                      width: 1,
+                      width: 1.w,
                     ),
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(12.r),
                   ),
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(12.r),
                     child: Image.asset(avatars[index], fit: BoxFit.cover),
                   ),
                 ),
@@ -100,11 +101,11 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
               context: context,
               barrierDismissible: false,
               builder:
-                  (_) => const AlertDialog(
+                  (_) => AlertDialog(
                     content: Row(
                       children: [
                         CircularProgressIndicator(),
-                        SizedBox(width: 16),
+                        SizedBox(width: 16.w),
                         Text("Loading..."),
                       ],
                     ),
@@ -117,7 +118,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
               context: context,
               barrierDismissible: false,
               builder:
-                  (_) =>AlertDialog(
+                  (_) => AlertDialog(
                     title: Text("Error"),
                     content: Text(state.message),
                     actions: [
@@ -148,30 +149,30 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
             backgroundColor: Colors.black,
             elevation: 0,
             leading: IconButton(
-              icon: const Icon(Icons.arrow_back, color: Colors.yellow),
+              icon: Icon(Icons.arrow_back, color: Colors.yellow),
               onPressed: () {
                 Navigator.pop(context);
               },
             ),
-            title: const Text(
+            title: Text(
               "Pick Avatar",
-              style: TextStyle(color: Color(0xffF6BD00), fontSize: 16),
+              style: TextStyle(color: Color(0xffF6BD00), fontSize: 16.sp),
             ),
             centerTitle: true,
           ),
           body: Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: EdgeInsets.all(20.0.w),
             child: Column(
               children: [
                 GestureDetector(
                   onTap: _showAvatarPicker,
                   child: CircleAvatar(
-                    radius: 60,
+                    radius: 60.r,
                     backgroundImage: AssetImage(avatars[selectedAvatar ?? 0]),
                     backgroundColor: Colors.grey[800],
                   ),
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20.h),
                 // Name field
                 TextField(
                   controller: nameController,
@@ -181,12 +182,12 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                     filled: true,
                     fillColor: Colors.grey[900],
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
+                      borderRadius: BorderRadius.circular(16.r),
                       borderSide: BorderSide.none,
                     ),
                   ),
                 ),
-                const SizedBox(height: 15),
+                SizedBox(height: 15.h),
 
                 // Phone field
                 TextField(
@@ -198,13 +199,13 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                     filled: true,
                     fillColor: Colors.grey[900],
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
+                      borderRadius: BorderRadius.circular(15.r),
                       borderSide: BorderSide.none,
                     ),
                   ),
                 ),
 
-                const SizedBox(height: 20),
+                SizedBox(height: 20.h),
                 Align(
                   alignment: Alignment.centerLeft,
                   child: TextButton(
@@ -218,7 +219,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   ),
                 ),
 
-                const Spacer(),
+                Spacer(),
 
                 // Delete account button
                 ElevatedButton(
@@ -230,18 +231,18 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xffE82626),
-                    minimumSize: const Size(double.infinity, 50),
+                    backgroundColor: Color(0xffE82626),
+                    minimumSize: Size(double.infinity, 50.r),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(10.r),
                     ),
                   ),
-                  child: const Text(
+                  child: Text(
                     "Delete Account",
-                    style: TextStyle(fontSize: 16, color: Colors.white),
+                    style: TextStyle(fontSize: 16.sp, color: Colors.white),
                   ),
                 ),
-                const SizedBox(height: 15),
+                SizedBox(height: 15.h),
 
                 // Update data button
                 ElevatedButton(
@@ -254,14 +255,14 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.amber,
-                    minimumSize: const Size(double.infinity, 50),
+                    minimumSize: Size(double.infinity, 50.r),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(10.r),
                     ),
                   ),
-                  child: const Text(
+                  child: Text(
                     "Update Data",
-                    style: TextStyle(fontSize: 16, color: Colors.black),
+                    style: TextStyle(fontSize: 16.sp, color: Colors.black),
                   ),
                 ),
               ],

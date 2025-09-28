@@ -29,6 +29,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
   TextEditingController passwordController = TextEditingController();
 
+  OutlineInputBorder inputBorder = OutlineInputBorder(
+    borderRadius: BorderRadius.circular(16.r),
+    borderSide: BorderSide(color: Color(0xff282A28)),
+  );
+
   LoginViewModel loginViewModel = LoginViewModel();
 
   @override
@@ -42,11 +47,11 @@ class _LoginScreenState extends State<LoginScreen> {
               context: context,
               barrierDismissible: false,
               builder:
-                  (_) => const AlertDialog(
+                  (_) => AlertDialog(
                     content: Row(
                       children: [
                         CircularProgressIndicator(),
-                        SizedBox(width: 16),
+                        SizedBox(width: 16.w),
                         Text("Loading..."),
                       ],
                     ),
@@ -116,24 +121,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             cursorColor: Colors.white,
                             decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(16.r),
-                                borderSide: BorderSide(
-                                  color: Color(0xff282A28),
-                                ),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(16.r),
-                                borderSide: BorderSide(
-                                  color: Color(0xff282A28),
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(16.r),
-                                borderSide: BorderSide(
-                                  color: Color(0xff282A28),
-                                ),
-                              ),
+                              border:inputBorder,
+                              enabledBorder:inputBorder,
+                              focusedBorder:inputBorder,
                               filled: true,
                               fillColor: Color(0xff282A28),
                               hintText: "Email",
@@ -163,24 +153,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             obscureText: hideText,
                             cursorColor: Colors.white,
                             decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(16.r),
-                                borderSide: BorderSide(
-                                  color: Color(0xff282A28),
-                                ),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(16.r),
-                                borderSide: BorderSide(
-                                  color: Color(0xff282A28),
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(16.r),
-                                borderSide: BorderSide(
-                                  color: Color(0xff282A28),
-                                ),
-                              ),
+                              border:inputBorder,
+                              enabledBorder:inputBorder,
+                              focusedBorder:inputBorder,
                               filled: true,
                               fillColor: Color(0xff282A28),
 
