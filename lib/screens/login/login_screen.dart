@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:movieapp/screens/home_screen.dart';
+import 'package:movieapp/screens/home/home_screen.dart';
 import 'package:movieapp/screens/login/login_view_model.dart';
 import 'package:movieapp/screens/register/register_screen.dart';
 import 'package:movieapp/screens/forget_password.dart';

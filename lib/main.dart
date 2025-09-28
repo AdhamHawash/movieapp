@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movieapp/screens/onboarding.dart';
-import 'package:movieapp/screens/home_screen.dart';
+import 'package:movieapp/screens/home/home_screen.dart';
 import 'package:movieapp/screens/login/login_screen.dart';
 import 'package:movieapp/screens/movie_details/movie_details.dart';
 import 'package:movieapp/screens/register/register_screen.dart';
