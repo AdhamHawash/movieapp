@@ -230,19 +230,19 @@ class MovieDetails extends StatelessWidget {
                         children: [
                           Text("Screen Shots", style: titlesStyle),
                           ClipRRect(
-                            borderRadius: BorderRadius.circular(16),
+                            borderRadius: BorderRadius.circular(16.r),
                             child: Image.network(
                               viewModel.movie!.largeScreenshot1 ?? "",
                             ),
                           ),
                           ClipRRect(
-                            borderRadius: BorderRadius.circular(16),
+                            borderRadius: BorderRadius.circular(16.r),
                             child: Image.network(
                               viewModel.movie!.largeScreenshot2 ?? "",
                             ),
                           ),
                           ClipRRect(
-                            borderRadius: BorderRadius.circular(16),
+                            borderRadius: BorderRadius.circular(16.r),
                             child: Image.network(
                               viewModel.movie!.largeScreenshot3 ?? "",
                             ),
